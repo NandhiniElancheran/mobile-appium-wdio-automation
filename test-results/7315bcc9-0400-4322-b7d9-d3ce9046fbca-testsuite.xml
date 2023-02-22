@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1677051038792' stop='1677051058478'>
+    <name>Feature - Add money </name>
+    <title>Feature - Add money </title>
+    <test-cases>
+        <test-case start='1677051038792' status='broken' stop='1677051058477'>
+            <name>Verify user's Account Top Up using Checkout provider Debit Card</name>
+            <title>Verify user's Account Top Up using Checkout provider Debit Card</title>
+            <labels>
+                <label name='language' value='javascript'/>
+                <label name='framework' value='wdio'/>
+                <label name='thread' value='0-0'/>
+            </labels>
+            <parameters>
+                <parameter kind='argument' name='device' value='emulator-5554 12-12'/>
+            </parameters>
+            <steps/>
+            <attachments>
+                <attachment title='Screenshot' source='0a5adfd5-5e1e-426f-b17f-322aaf7ac82f-attachment.png' type='image/png' size='78897'/>
+            </attachments>
+            <failure>
+                <message>Can't call click on element with selector "//android.widget.TextView[@text='1']" because element wasn't found</message>
+                <stack-trace>Error: Can't call click on element with selector "//android.widget.TextView[@text='1']" because element wasn't found
+                    at async PasscodePage.enterPasscode (/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/pageobjects/passcode.page.js:15:6)
+                    at async Context.&lt;anonymous> (/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/specs/addMoney.test.js:12:5)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
