@@ -61,6 +61,7 @@ exports.config = {
         "deviceName": "emulator-5554",
         "app": "/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/app-dev-release.apk",
         "autoGrantPermissions": "true",
+        "noReset":"false",
         // "browserName": "chrome"
         //  "appPackage": "com.pyypl.dev"
         // If outputDir is provided WebdriverIO can capture driver session logs
@@ -102,7 +103,7 @@ exports.config = {
     baseUrl: 'http://localhost',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 12000,
+    waitforTimeout: 60000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -121,7 +122,6 @@ exports.config = {
         args: {
             // ...
             debugLogSpacing: true,
-
             // ...
         }
     }]
@@ -284,7 +284,6 @@ exports.config = {
             await driver.takeScreenshot();
         }
        // mergeResults('./mocha-results', "results-*")
-
     },
 
     // Located in your wdio.conf.js file
@@ -292,8 +291,10 @@ exports.config = {
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details
      */
-    // afterSuite: function (suite) {
-    // },
+    afterSuite: async function  (suite) {
+      //  driver.deleteSession();
+       // await driver.quit();
+    },
     /**
      * Runs after a WebdriverIO command gets executed
      * @param {String} commandName hook command name
