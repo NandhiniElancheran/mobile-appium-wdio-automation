@@ -1,8 +1,8 @@
 const passcodePageSelectors = {
-    key1: "//android.widget.TextView[@text='1']",
-    key2: "//android.widget.TextView[@text='2']",
-    key3: "//android.widget.TextView[@text='3']",
-    key4: "//android.widget.TextView[@text='4']",
+    key1: driver.isAndroid? "//android.widget.TextView[@text='1']" : '~test:id/1',
+    key2: driver.isAndroid? "//android.widget.TextView[@text='2']" : '~test:id/2',
+    key3: driver.isAndroid? "//android.widget.TextView[@text='3']" : '~test:id/3',
+    key4: driver.isAndroid? "//android.widget.TextView[@text='4']" : '~test:id/4',
     passcodeOneTxt : "//android.widget.TextView[@text='Personal passcode']//following-sibling::*[1]",
     passcodeTwoTxt : "//android.widget.TextView[@text='Personal passcode']//following-sibling::*[2]",
     passcodeThreeTxt : "//android.widget.TextView[@text='Personal passcode']//following-sibling::*[3]",

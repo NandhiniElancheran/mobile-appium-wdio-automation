@@ -1,5 +1,6 @@
 node_modules
-/test/app
+test/app
 test-results
 allure-report
+wdio-appium.log
 

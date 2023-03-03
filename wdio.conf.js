@@ -8,8 +8,6 @@ exports.config = {
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
     port: 4723,
-    path: '/wd/hub',
-
     //
     // ==================
     // Specify Test Files
@@ -56,12 +54,20 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        "platformName": "Android",
-        "platformVersion": "12",
-        "deviceName": "emulator-5554",
-        "app": "/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/app-dev-release.apk",
-        "autoGrantPermissions": "true",
-        "noReset":"false",
+        //  platformName: 'Android',
+        //   'appium:automationName': 'UiAutomator2',
+        //   'appium:platformVersion': '13',
+        //   'appium:deviceName': 'emulator-5554',
+       'appium:automationName': 'XCUITest',
+       'platformName': 'iOS',
+        'appium:platformVersion': '16.2',
+       'appium:deviceName': 'iPhone 14',
+       'appium:bundleId': 'com.pyypl.dev',
+        'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/ios/pyypl.app',
+      //  'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/android/app-dev-release.apk',
+        'appium:autoGrantPermissions': 'true',
+        'appium:autoAcceptAlerts': 'true',
+        'appium:noReset': 'false',
         // "browserName": "chrome"
         //  "appPackage": "com.pyypl.dev"
         // If outputDir is provided WebdriverIO can capture driver session logs
@@ -76,7 +82,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'error',
+    logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:
@@ -103,11 +109,11 @@ exports.config = {
     baseUrl: 'http://localhost',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 60000,
+    waitforTimeout: 30000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 60000,
+    connectionRetryTimeout: 120000,
     //
     // Default request retries count
     connectionRetryCount: 2,
@@ -116,13 +122,13 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [['chromedriver'],
+    services: ['intercept',
     ['appium', {
         command: 'appium',
+        logPath : './',
         args: {
-            // ...
             debugLogSpacing: true,
-            // ...
+            relaxedSecurity: true,
         }
     }]
     ],
@@ -135,7 +141,7 @@ exports.config = {
     // before running any tests.
     framework: 'mocha',
     mochaOpts: {
-        timeout: 20000
+        timeout: 80000
     },
     //
     // The number of times to retry the entire specfile when it fails as a whole
@@ -162,7 +168,7 @@ exports.config = {
         ['allure', {
             outputDir: 'test-results',
             disableWebdriverStepsReporting: true,
-            disableWebdriverSscreenshotsReporting: false,
+            disableWebdriverScreenshotsReporting: false,
         }],
 
         // ['mochawesome', {
@@ -180,7 +186,7 @@ exports.config = {
 
     //
     // Options to be passed to Mocha.
-    // See the full list at http://mochajs.org/
+    // See the full list at http://moc  hajs.org/
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
@@ -330,27 +336,47 @@ exports.config = {
      * @param {<Object>} results object containing test results
      */
 
-    onComplete: function (exitCode, config, capabilities, results) {
-       // mergeResults('./mocha-results', "results-*")
-       const reportError = new Error('Could not generate Allure report')
-        const generation = allure(['generate', 'test-results', '--clean'])
-        return new Promise((resolve, reject) => {
-            const generationTimeout = setTimeout(
-                () => reject(reportError),
-                5000)
+    // onComplete: function (exitCode, config, capabilities, results) {
+    //    // mergeResults('./mocha-results', "results-*")
+    //    const reportError = new Error('Could not generate Allure report')
+    //     const generation = allure(['serve', 'test-results', '--clean'])
+    //     return new Promise((resolve, reject) => {
+    //         const generationTimeout = setTimeout(
+    //             () => reject(reportError),
+    //             5000)
 
-            generation.on('exit', function(exitCode) {
-                clearTimeout(generationTimeout)
+    //         generation.on('exit', function(exitCode) {
+    //             clearTimeout(generationTimeout)
 
-                if (exitCode !== 0) {
-                    return reject(reportError)
-                }
+    //             if (exitCode !== 0) {
+    //                 return reject(reportError)
+    //             }
 
-                console.log('Allure report successfully generated')
-                resolve()
-            })
-        })
-    }
+    //             console.log('Allure report successfully generated')
+    //             resolve()
+    //         })
+    //     })
+    // }
+    // onComplete: function() {
+    //     const reportError = new Error('Could not generate Allure report')
+    //     const generation = allure(['generate', 'test-results', '--clean'])
+    //     return new Promise((resolve, reject) => {
+    //         const generationTimeout = setTimeout(
+    //             () => reject(reportError),
+    //             5000)
+
+    //         generation.on('exit', function(exitCode) {
+    //             clearTimeout(generationTimeout)
+
+    //             if (exitCode !== 0) {
+    //                 return reject(reportError)
+    //             }
+
+    //             console.log('Allure report successfully generated')
+    //             resolve()
+    //         })
+    //     })
+    // }
     /**
     * Gets executed when a refresh happens.
     * @param {String} oldSessionId session ID of the old session
