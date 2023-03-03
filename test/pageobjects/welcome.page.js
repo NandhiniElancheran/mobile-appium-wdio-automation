@@ -1,14 +1,28 @@
 const welcomePageSelectors = {
-    loginBtn: ("//android.widget.TextView[@text='Log in']"),
-    createAccountBtn: "//android.widget.TextView[@text='Create account']"
+    android : {
+       // loginBtn: ("//android.widget.TextView[@text='Log in']"),
+        loginBtn: 'id:test:id/LoginButton',
+        createAccountBtn: "//android.widget.TextView[@text='Create account']"
+    },
+    ios: {
+        loginBtn: '~test:id/LoginBtn',
+        createAccountBtn: '~test:id/CreateAccountBtn'
+    }
+    
+    
 };
 
 class WelcomePage {
 
     async navigateToLoginPage() {
-        await expect(await $(welcomePageSelectors.loginBtn)).toBeDisplayed();
-        await expect(await $(welcomePageSelectors.createAccountBtn)).toBeDisplayed();
-        await $(welcomePageSelectors.loginBtn).click();
+        await driver.pause(3000);
+     //   const elem = await $(welcomePageSelectors.loginBtn); 
+      //  await expect(elem).toHaveText('Log in');
+      // await $('id:test:id/LoginButton').click();
+     // await elem.scrollIntoView();
+        await expect(await $(driver.isAndroid?(welcomePageSelectors.android.loginBtn):(welcomePageSelectors.ios.loginBtn))).toBeDisplayed();
+        await expect(await $(driver.isAndroid?welcomePageSelectors.android.createAccountBtn:welcomePageSelectors.ios.createAccountBtn)).toBeDisplayed();
+        await $(driver.isAndroid?(welcomePageSelectors.android.loginBtn):(welcomePageSelectors.ios.loginBtn)).click();
     }
 }
 
