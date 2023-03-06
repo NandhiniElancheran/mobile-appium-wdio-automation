@@ -9,7 +9,7 @@ describe('Feature - Add money - Debit card Checkout Provider', () => {
   it(`Verify user's Account Top Up using Checkout provider Debit Card`, async () => {
     await WelcomePage.navigateToLoginPage();
     await LoginPage.login(data?.mobileNumber, data?.entityUserCountry);
-    await LoginPage.getOtp();
+    //await LoginPage.getOtp();
     await PasscodePage.enterPasscode();
     await PersonalUserAccountsPage.navigateToTopUpPage();
     await TopUpPage.selectDebit();
