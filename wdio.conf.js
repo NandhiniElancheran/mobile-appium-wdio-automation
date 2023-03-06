@@ -25,7 +25,9 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './test/specs/**/*.js'
+      //  './test/specs/**/*.js',
+        './test/specs/addMoney.test.js'
+      //'/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/specs/sendMoney.test.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -47,24 +49,50 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    // maxInstances: 10,
+     maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
+
+    // capabilities: {
+    //     Android: {
+    //         capabilities: {
+    //             platformName: 'Android',
+    //            'appium:automationName': 'UiAutomator2',
+    //            'appium:platformVersion': '13',
+    //            'appium:deviceName': 'emulator-5554',
+    //            'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/android/app-dev-release.apk',
+    //            'appium:noReset': 'false',
+    //            'appium:autoGrantPermissions': 'true'
+    //         }
+    //     },
+    //     iOS: {
+    //         capabilities: {
+    //             platformName: 'iOS',
+    //             'appium:automationName': 'XCUITest',
+    //             'appium:platformVersion': '16.2',
+    //             'appium:deviceName': 'iPhone 14 Pro',
+    //             'appium:bundleId': 'com.pyypl.dev',
+    //             'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/ios/pyypl.app',
+    //             'appium:autoAcceptAlerts': 'true',
+    //             'appium:noReset': 'false'
+    //         }
+    //     }
+    // },
     capabilities: [{
         //  platformName: 'Android',
         //   'appium:automationName': 'UiAutomator2',
         //   'appium:platformVersion': '13',
         //   'appium:deviceName': 'emulator-5554',
-       'appium:automationName': 'XCUITest',
-       'platformName': 'iOS',
+        'appium:automationName': 'XCUITest',
+        'platformName': 'iOS',
         'appium:platformVersion': '16.2',
-       'appium:deviceName': 'iPhone 14',
-       'appium:bundleId': 'com.pyypl.dev',
+        'appium:deviceName': 'iPhone 14 Plus',
+        'appium:bundleId': 'com.pyypl.dev',
         'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/ios/pyypl.app',
-      //  'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/android/app-dev-release.apk',
+        //  'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/android/app-dev-release.apk',
         'appium:autoGrantPermissions': 'true',
         'appium:autoAcceptAlerts': 'true',
         'appium:noReset': 'false',
@@ -113,7 +141,7 @@ exports.config = {
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 120000,
+    connectionRetryTimeout: 12000,
     //
     // Default request retries count
     connectionRetryCount: 2,
@@ -189,7 +217,7 @@ exports.config = {
     // See the full list at http://moc  hajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 80000
     },
     //
     // =====
