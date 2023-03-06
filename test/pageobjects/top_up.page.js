@@ -6,11 +6,13 @@ const { setTimeout } = require('timers/promises');
 const { driver, $, $$, expect } = require ('@wdio/globals');
 
 //const { waitForEnabled } = require('webdriverio/build/commands/element');
+import {formattedSelector} from '../helper/FormatSelectors'
+
 
 
 const topUpPageSelectors = {
-    debitCardTxt: driver.isAndroid ? "//android.widget.TextView[@text='Debit Card']" : '~test:id/DebitCardBtn',
-    amountTxt: driver.isAndroid ? "(//android.widget.EditText)[1]" : '~test:id/AmountInput',
+    debitCardTxt: formattedSelector('test:id/DebitCardBtn'),
+    amountTxt: formattedSelector('test:id/AmountInput'),
     cardNumberTxt: driver.isAndroid ? "//android.widget.EditText[@text='Card number']" : '~test:id/CardNumberInput',
     cardExpiryDate: driver.isAndroid ? "//android.widget.EditText[@text='MM/YY']" : '~test:id/CardExpiryInput',
     cardCvv: driver.isAndroid ? "//android.widget.EditText[@text='CVV']" : '~test:id/CardCVVInput',
