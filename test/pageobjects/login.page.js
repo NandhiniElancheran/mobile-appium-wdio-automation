@@ -1,5 +1,6 @@
 //import {setupInterceptor} from 'wdio-intercept-service'
 //const setupInterceptor = require('wdio-intercept-service');
+const { driver, $, $$, expect } = require ('@wdio/globals');
 
 const loginPageSelectors = {
   nextBtn: driver.isAndroid ? ("//android.widget.TextView[@text='Next']") : '~test:id/NextBtn',
@@ -16,18 +17,25 @@ class LoginPage {
   async login(mobileNumber, country) {
     await $(loginPageSelectors.countryCodeTxt).click();
     await new Promise(r => setTimeout(r, 5000));
+
     await $(loginPageSelectors.searchEditTxt).setValue(country);
     await this.selectCountry(country);
     if(!driver.isAndroid){
     let element = await $(`//XCUIElementTypeOther[@name="test:id/${country}"]`);
     await element.click();
     }
-    await $(loginPageSelectors.phoneNumberTxt).clearValue();
-    driver.pause(5000);
-    await $(loginPageSelectors.phoneNumberTxt).setValue(mobileNumber);
-   // await new Promise(r => setTimeout(r, 5000));
-    let elem = $(loginPageSelectors.nextBtn)
-    let isEnabled = elem.isDisplayed();
+     await $(loginPageSelectors.phoneNumberTxt).clearValue();
+     driver.pause(5000);
+     await $(loginPageSelectors.phoneNumberTxt).setValue(mobileNumber);
+
+
+
+  //  // await new Promise(r => setTimeout(r, 5000));
+  //   let elem = $(loginPageSelectors.nextBtn)
+  //   let isEnabled = elem.isDisplayed();
+
+
+
    // if(!isEnabled){
    //   await $(loginPageSelectors.phoneNumberTxt).clearValue();
   //    await $(loginPageSelectors.phoneNumberTxt).setValue(mobileNumber);
@@ -47,9 +55,9 @@ class LoginPage {
   async getOtp(){
     await driver.pause(20000);
     console.log('enterysgdh')
-    browser.setupInterceptor(); 
-    // let mobileNumberTxt = await $(loginPageSelectors.mobileNumberWithCode).getText();
-    // let mobileNumber = mobileNumberTxt.substring(35);
+    driver.setupInterceptor(); 
+    let mobileNumberTxt = await $(loginPageSelectors.mobileNumberWithCode).getText();
+     let mobileNumber = mobileNumberTxt.substring(35);
     // await browser.expectRequest('GET', `https://api.dev.pyypl.io/users/otp/${mobileNumber}`, 200); 
     // await browser.pause(3000);
     // let getOtpResponse = await browser.getRequest('GET',`https://api.dev.pyypl.io/users/otp/${mobileNumber}`);
