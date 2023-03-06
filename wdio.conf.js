@@ -25,9 +25,9 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-      //  './test/specs/**/*.js',
-        './test/specs/addMoney.test.js'
-      //'/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/specs/sendMoney.test.js'
+        './test/specs/**/*.js',
+    //    './test/specs/addMoney.test.js'
+     // '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/specs/sendMoney.test.js'
     ],
     // Patterns to exclude.
     exclude: [

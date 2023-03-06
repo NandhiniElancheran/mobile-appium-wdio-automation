@@ -1,12 +1,6 @@
-// import WebView from "../helper/WebView";
-// import { CONTEXT_REF } from "../helper/WebView";
-//const WebView = require('../helper/WebView.js');
-//const CONTEXT_REF = require('../helper/WebView.js');
 const { setTimeout } = require('timers/promises');
 const { driver, $, $$, expect } = require ('@wdio/globals');
-
 //const { waitForEnabled } = require('webdriverio/build/commands/element');
-
 
 const topUpPageSelectors = {
     debitCardTxt: driver.isAndroid ? "//android.widget.TextView[@text='Debit Card']" : '~test:id/DebitCardBtn',
