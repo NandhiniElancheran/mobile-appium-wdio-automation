@@ -4,6 +4,8 @@
   "description": "",
   "scripts": {
     "pretest": "rm -rf test-results",
+    "test android": "wdio run ./wdio.android.config.js",
+    "test ios": "wdio run ./wdio.ios.config.js",
     "test": "wdio run ./wdio.conf.js",
     "allure-report": "allure generate --clean ./test-results  && allure open",
     "report": "allure serve test-results --clean -o allure-report && allure open allure-report"

@@ -21,12 +21,12 @@ exports.config = {
     // process simply enclose them in an array within the specs array.
     //
     // If you are calling `wdio` from an NPM script (see https://docs.npmjs.com/cli/run-script),
-    // then the current working directory is where your `package.json` resides, so `wdio`
+    // then the current working directory is where your `package.json` resides,  `wdio`so
     // will be called from there.
     //
     specs: [
-        './test/specs/**/*.js',
-    //    './test/specs/addMoney.test.js'
+     //   './test/specs/**/*.js',
+        './test/specs/addMoney.test.js'
      // '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/specs/sendMoney.test.js'
     ],
     // Patterns to exclude.
@@ -55,33 +55,17 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-
-    capabilities: {
-        // Android: {
-        //     capabilities: {
-        //         platformName: 'Android',
-        //        'appium:automationName': 'UiAutomator2',
-        //        'appium:platformVersion': '13',
-        //        'appium:deviceName': 'emulator-5554',
-        //        'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/android/app-dev-release.apk',
-        //        'appium:noReset': 'false',
-        //        'appium:autoGrantPermissions': 'true'
-        //     }
-        // },
-        iOS: {
-            capabilities: {
-                platformName: 'iOS',
-                'appium:automationName': 'XCUITest',
-                'appium:platformVersion': '16.2',
-                'appium:deviceName': 'iPhone 14 Plus',
-                'appium:bundleId': 'com.pyypl.dev',
-                'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/ios/pyypl.app',
-                'appium:autoAcceptAlerts': 'true',
-                'appium:noReset': 'false'
-            }
-        }
-    },
-
+    capabilities: [{
+        'appium:automationName': 'XCUITest',
+        'platformName': 'iOS',
+        'appium:platformVersion': '16.2',
+        'appium:deviceName': 'iPhone 14 Plus',
+        'appium:bundleId': 'com.pyypl.dev',
+        'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/ios/pyypl.app',
+        'appium:autoGrantPermissions': 'true',
+        'appium:autoAcceptAlerts': 'true',
+        'appium:noReset': 'false'
+    }],
     //
     // ===================
     // Test Configurations

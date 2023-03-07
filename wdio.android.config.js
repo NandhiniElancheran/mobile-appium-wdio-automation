@@ -56,32 +56,41 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
 
-    capabilities: {
-        // Android: {
-        //     capabilities: {
-        //         platformName: 'Android',
-        //        'appium:automationName': 'UiAutomator2',
-        //        'appium:platformVersion': '13',
-        //        'appium:deviceName': 'emulator-5554',
-        //        'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/android/app-dev-release.apk',
-        //        'appium:noReset': 'false',
-        //        'appium:autoGrantPermissions': 'true'
-        //     }
-        // },
-        iOS: {
-            capabilities: {
-                platformName: 'iOS',
-                'appium:automationName': 'XCUITest',
-                'appium:platformVersion': '16.2',
-                'appium:deviceName': 'iPhone 14 Plus',
-                'appium:bundleId': 'com.pyypl.dev',
-                'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/ios/pyypl.app',
-                'appium:autoAcceptAlerts': 'true',
-                'appium:noReset': 'false'
-            }
-        }
-    },
-
+    // capabilities: {
+    //     Android: {
+    //         capabilities: {
+    //             platformName: 'Android',
+    //            'appium:automationName': 'UiAutomator2',
+    //            'appium:platformVersion': '13',
+    //            'appium:deviceName': 'emulator-5554',
+    //            'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/android/app-dev-release.apk',
+    //            'appium:noReset': 'false',
+    //            'appium:autoGrantPermissions': 'true'
+    //         }
+    //     },
+    //     iOS: {
+    //         capabilities: {
+    //             platformName: 'iOS',
+    //             'appium:automationName': 'XCUITest',
+    //             'appium:platformVersion': '16.2',
+    //             'appium:deviceName': 'iPhone 14 Pro',
+    //             'appium:bundleId': 'com.pyypl.dev',
+    //             'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/ios/pyypl.app',
+    //             'appium:autoAcceptAlerts': 'true',
+    //             'appium:noReset': 'false'
+    //         }
+    //     }
+    // },
+    // capabilities: [{
+    //      platformName: 'Android',
+    //     'appium:automationName': 'UiAutomator2',
+    //     'appium:platformVersion': '13',
+    //     'appium:deviceName': 'emulator-5554',
+    //     'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/android/app-dev-release.apk',
+    //     'appium:autoGrantPermissions': 'true',
+    //     'appium:autoAcceptAlerts': 'true',
+    //     'appium:noReset': 'false',
+    // }],
     //
     // ===================
     // Test Configurations

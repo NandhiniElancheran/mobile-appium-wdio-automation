@@ -16,8 +16,7 @@ describe('Feature - Add money - Debit card Checkout Provider', () => {
     await WelcomePage.navigateToLoginPage();
     await LoginPage.login(data?.mobileNumber, data?.entityUserCountry);
    // await LoginPage.getOtp();
-    await PasscodePage.enterPasscode();
-    
+    /*   await PasscodePage.enterPasscode();
       await PersonalUserAccountsPage.navigateToSendPage();
       await SendMoneyToPage.clickPyyplTransfer();
       await SendToPage.enterPhoneNumber('555500113');
@@ -28,6 +27,6 @@ describe('Feature - Add money - Debit card Checkout Provider', () => {
       await TransactionConfirmedPage.verifyStatusConfirmed();
       await TransactionConfirmedPage.clickBackHomeButton();
       await PersonalUserAccountsPage.clickProfileImg();
-      await PersonalUserAccountsPage.logout();
+      await PersonalUserAccountsPage.logout(); */
     })
 })

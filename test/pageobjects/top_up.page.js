@@ -62,13 +62,35 @@ class TopUpPage {
         driver.pause(10000);
           await new Promise(r => setTimeout(r, 60000));
           await setTimeout (10000);
+
+          //Dimension size = driver.manage().window().getSize();
+          //int width = size.getWidth();
+          //int height = size.getHeight();
+
+          let size = driver.getWindowRect();
+
+         let height =  (await size).height;
+         let width = (await size).width;
+
+          
+        //   let x1 = (int) (width * 0.2);
+        //   let x2 = (int) (width * 0.2);
+        //   let y1 = (int) (height * 0.2);
+        //   let y2 = (int) (height * 0.7);
+
+
+//  new TouchAction((PerformsTouchActions) GlobalVars.driver).press(PointOption.point(x1, y1))
+//  .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(x2, y2))
+//  .release().perform();
+
+
        //   const el = await $('//XCUIElementTypeOther[@name="Bottom Sheet handle"]');
        //  await el.waitForDisplayed({ timeout: 10000 });
 
-         var result = browser.execute('mobile: scroll', {direction: 'down'});
+         //var result = browser.execute('mobile: scroll', {direction: 'down'});
          //driver.execute('mobile: doubleTap', {element: element.value.ELEMENT});
 
-         await browser.execute("mobile: scroll", {  strategy: '~Bottom Sheet handle', selector : locator})
+         //await browser.execute("mobile: scroll", {  strategy: '~Bottom Sheet handle', selector : locator})
 
         // await setTimeout (3000);
         // await driver.touchPerform([
@@ -80,9 +102,7 @@ class TopUpPage {
        // const myElem = await $(topUpPageSelectors.yourLoadOf)
        // await myElem.waitForDisplayed()
 
-//         driver.touchAction().longPress(PointOption.point(210, 124))
-// .moveTo(PointOption.point(210, 867))
-// .release().perform();
+         
 
 //driver.execute('mobile: scroll', {direction: 'down'});
 

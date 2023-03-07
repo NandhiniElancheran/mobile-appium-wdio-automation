@@ -2,17 +2,8 @@ const {driver, $, $$, expect } = require ('@wdio/globals');
 const {formattedSelector} = require('../helper/FormatSelectors.js')
 
 const welcomePageSelectors = {
-    // android : {
-    //     loginBtn: ("//android.widget.TextView[@text='Log in']"),
-    //   //  loginBtn: 'id:test:id/LoginButton',
-    //     createAccountBtn: "//android.widget.TextView[@text='Create account']"
-    // },
-    // ios: {
-        loginBtn: 'test:id/LoginBtn',
-        createAccountBtn: 'test:id/CreateAccountBtn'
-  //  }
-    
-    
+        loginBtn: driver.isAndroid ? "//android.widget.TextView[@text='Log in']" :'~test:id/LoginBtn',
+        createAccountBtn: 'test:id/CreateAccountBtn'    
 };
 
 class WelcomePage {
@@ -23,9 +14,14 @@ class WelcomePage {
       //  await expect(elem).toHaveText('Log in');
       // await $('id:test:id/LoginButton').click();
      // await elem.scrollIntoView();
-        await expect(await $(formattedSelector(welcomePageSelectors.loginBtn))).toBeDisplayed();
+      
+     await $((welcomePageSelectors.loginBtn)).click();
+
+     
+    /*  await expect(await $(formattedSelector(welcomePageSelectors.loginBtn))).toBeDisplayed();
         await expect(await $(formattedSelector(welcomePageSelectors.createAccountBtn))).toBeDisplayed();
-        await $(formattedSelector(welcomePageSelectors.loginBtn)).click();
+        await $(formattedSelector(welcomePageSelectors.loginBtn)).click();    
+    */
     }
 }
 

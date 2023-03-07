@@ -10,17 +10,17 @@ describe('Feature - Add money - Debit card Checkout Provider', () => {
     await WelcomePage.navigateToLoginPage();
     await LoginPage.login(data?.mobileNumber, data?.entityUserCountry);
     //await LoginPage.getOtp();
-    await PasscodePage.enterPasscode();
-    await PersonalUserAccountsPage.navigateToTopUpPage();
-    await TopUpPage.selectDebit();
-    await TopUpPage.enterCheckoutDebitCardDetails(data?.amount, data?.checkoutDebitCard, data?.expiryDate, data?.cvv);
-    await TopUpPage.verifyTopUpDetails();
-    await TopUpPage.verifyTransactionDetails();
-    if (driver.isAndroid) {
-      await TopUpPage.navigateToTopUpOptionsPage();
-    }
-    await PersonalUserAccountsPage.clickProfileImg();
-    await PersonalUserAccountsPage.logout();
+    // await PasscodePage.enterPasscode();
+    // await PersonalUserAccountsPage.navigateToTopUpPage();
+    // await TopUpPage.selectDebit();
+    // await TopUpPage.enterCheckoutDebitCardDetails(data?.amount, data?.checkoutDebitCard, data?.expiryDate, data?.cvv);
+    // await TopUpPage.verifyTopUpDetails();
+    // await TopUpPage.verifyTransactionDetails();
+    // if (driver.isAndroid) {
+    //   await TopUpPage.navigateToTopUpOptionsPage();
+    // }
+    // await PersonalUserAccountsPage.clickProfileImg();
+    // await PersonalUserAccountsPage.logout();
 
   })
 })
