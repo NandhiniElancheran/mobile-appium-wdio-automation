@@ -1,14 +1,16 @@
+const {formattedSelector} = require('../helper/FormatSelectors.js')
+
 const sendMoneyToPageSelectors = {
-    pyyplTransfer: driver.isAndroid ? "//android.widget.TextView[@text='Top up']" : '~test:id/PYYPL_TO_PYYPL',
-    internationalTransfer: driver.isAndroid ? "//android.widget.TextView[@text='Send']" : '~test:id/INTERNATIONAL_TRANSFER',
+    pyyplTransfer: 'test:id/PYYPL_TO_PYYPL',
+    internationalTransfer: 'test:id/INTERNATIONAL_TRANSFER',
    };
 class SendMoneyToPage {
     
     async clickPyyplTransfer() {
-        await $(sendMoneyToPageSelectors.pyyplTransfer).click();
+        await $(formattedSelector(sendMoneyToPageSelectors.pyyplTransfer)).click();
     }
     async clickInternationalTransfer() {
-        await $(sendMoneyToPageSelectors.internationalTransfer).click();
+        await $(formattedSelector(sendMoneyToPageSelectors.internationalTransfer)).click();
     }
    
 }

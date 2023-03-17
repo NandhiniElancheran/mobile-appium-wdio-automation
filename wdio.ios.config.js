@@ -1,118 +1,38 @@
 const allure = require('allure-commandline')
 
 exports.config = {
-    //
-    // ====================
-    // Runner Configuration
-    // ====================
-    // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
     port: 4723,
-    //
-    // ==================
-    // Specify Test Files
-    // ==================
-    // Define which test specs should run. The pattern is relative to the directory
-    // of the configuration file being run.
-    //
-    // The specs are defined as an array of spec files (optionally using wildcards
-    // that will be expanded). The test for each spec file will be run in a separate
-    // worker process. In order to have a group of spec files run in the same worker
-    // process simply enclose them in an array within the specs array.
-    //
-    // If you are calling `wdio` from an NPM script (see https://docs.npmjs.com/cli/run-script),
-    // then the current working directory is where your `package.json` resides,  `wdio`so
-    // will be called from there.
-    //
+
     specs: [
-     //   './test/specs/**/*.js',
-        './test/specs/addMoney.test.js'
-     // '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/specs/sendMoney.test.js'
+     './test/specs/addMoney.test.js',
     ],
-    // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
     ],
-    //
-    // ============
-    // Capabilities
-    // ============
-    // Define your capabilities here. WebdriverIO can run multiple capabilities at the same
-    // time. Depending on the number of capabilities, WebdriverIO launches several test
-    // sessions. Within your capabilities you can overwrite the spec and exclude options in
-    // order to group specific specs to a specific capability.
-    //
-    // First, you can define how many instances should be started at the same time. Let's
-    // say you have 3 different capabilities (Chrome, Firefox, and Safari) and you have
-    // set maxInstances to 1; wdio will spawn 3 processes. Therefore, if you have 10 spec
-    // files and you set maxInstances to 10, all spec files will get tested at the same time
-    // and 30 processes will get spawned. The property handles how many capabilities
-    // from the same test should run tests.
-    //
-     maxInstances: 1,
-    //
-    // If you have trouble getting all important capabilities together, check out the
-    // Sauce Labs platform configurator - a great tool to configure your capabilities:
-    // https://saucelabs.com/platform/platform-configurator
-    //
+    
+    maxInstances: 1,
+    
     capabilities: [{
         'appium:automationName': 'XCUITest',
         'platformName': 'iOS',
         'appium:platformVersion': '16.2',
-        'appium:deviceName': 'iPhone 14 Plus',
+        'appium:deviceName': 'iPhone 14 Pro Max',
         'appium:bundleId': 'com.pyypl.dev',
-        'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/ios/pyypl.app',
+        'appium:app': './test/app/ios/pyypl.app',
         'appium:autoGrantPermissions': 'true',
         'appium:autoAcceptAlerts': 'true',
-        'appium:noReset': 'false'
+        'appium:noReset': 'true'
     }],
-    //
-    // ===================
-    // Test Configurations
-    // ===================
-    // Define all options that are relevant for the WebdriverIO instance here
-    //
+    
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: 'info',
-    //
-    // Set specific log levels per logger
-    // loggers:
-    // - webdriver, webdriverio
-    // - @wdio/browserstack-service, @wdio/devtools-service, @wdio/sauce-service
-    // - @wdio/mocha-framework, @wdio/jasmine-framework
-    // - @wdio/local-runner
-    // - @wdio/sumologic-reporter
-    // - @wdio/cli, @wdio/config, @wdio/utils
-    // Level of logging verbosity: trace | debug | info | warn | error | silent
-    // logLevels: {
-    //     webdriver: 'info',
-    //     '@wdio/appium-service': 'info'
-    // },
-    //
-    // If you only want to run your tests until a specific amount of tests have failed use
-    // bail (default is 0 - don't bail, run all tests).
     bail: 0,
-    //
-    // Set a base URL in order to shorten url command calls. If your `url` parameter starts
-    // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
-    // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
-    // gets prepended directly.
     baseUrl: 'http://localhost',
-    //
-    // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,
-    //
-    // Default timeout in milliseconds for request
-    // if browser driver or grid doesn't send response
     connectionRetryTimeout: 12000,
-    //
-    // Default request retries count
     connectionRetryCount: 2,
-    //
-    // Test runner services
-    // Services take over a specific job you don't want to take care of. They enhance
-    // your test setup with almost no effort. Unlike plugins, they don't add new
-    // commands. Instead, they hook themselves up into the test process.
+    
     services: ['intercept',
     ['appium', {
         command: 'appium',
@@ -124,15 +44,9 @@ exports.config = {
     }]
     ],
 
-    // Framework you want to run your specs with.
-    // The following are supported: Mocha, Jasmine, and Cucumber
-    // see also: https://webdriver.io/docs/frameworks
-    //
-    // Make sure you have the wdio adapter package for the specific framework installed
-    // before running any tests.
     framework: 'mocha',
     mochaOpts: {
-        timeout: 80000
+        timeout: 150000
     },
     //
     // The number of times to retry the entire specfile when it fails as a whole
@@ -143,44 +57,18 @@ exports.config = {
     //
     // Whether or not retried specfiles should be retried immediately or deferred to the end of the queue
     // specFileRetriesDeferred: false,
-    //
-    // Test reporter for stdout.
-    // The only one supported by default is 'dot'
-    // see also: https://webdriver.io/docs/dot-reporter
+  
     reporters: [ 
-    //     ['spec',{
-    //     showPreface: false,
-    //     realtimeReporting: true,
-    //     symbols: {
-    //       passed: '[PASS]',
-    //       failed: '[FAIL]',
-    //     },
-    //   }],
         ['allure', {
             outputDir: 'test-results',
             disableWebdriverStepsReporting: true,
             disableWebdriverScreenshotsReporting: false,
         }],
-
-        // ['mochawesome', {
-        //     outputDir: './Results',
-        //     outputFileFormat: function (opts) {
-        //         return `results-${opts.cid}.${opts.capabilities}.json`
-        //     }
-        // }]
     ],
-    // mochawesomeOpts: {
-    //     includeScreenshots: true,
-    //     screenshotUseRelativePath: true
-    // },
 
-
-    //
-    // Options to be passed to Mocha.
-    // See the full list at http://moc  hajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 80000
+        timeout: 150000
     },
     //
     // =====
@@ -280,17 +168,14 @@ exports.config = {
         if (error) {
             await driver.takeScreenshot();
         }
-       // mergeResults('./mocha-results', "results-*")
     },
 
-    // Located in your wdio.conf.js file
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details
      */
     afterSuite: async function  (suite) {
-      //  driver.deleteSession();
-       // await driver.quit();
+
     },
     /**
      * Runs after a WebdriverIO command gets executed
@@ -327,47 +212,46 @@ exports.config = {
      * @param {<Object>} results object containing test results
      */
 
-    // onComplete: function (exitCode, config, capabilities, results) {
-    //    // mergeResults('./mocha-results', "results-*")
-    //    const reportError = new Error('Could not generate Allure report')
-    //     const generation = allure(['serve', 'test-results', '--clean'])
-    //     return new Promise((resolve, reject) => {
-    //         const generationTimeout = setTimeout(
-    //             () => reject(reportError),
-    //             5000)
+    onComplete: function (exitCode, config, capabilities, results) {
+       const reportError = new Error('Could not generate Allure report')
+        const generation = allure(['serve', 'test-results'/* , '--clean' */])
+        return new Promise((resolve, reject) => {
+            const generationTimeout = setTimeout(
+                () => reject(reportError),
+                5000)
 
-    //         generation.on('exit', function(exitCode) {
-    //             clearTimeout(generationTimeout)
+            generation.on('exit', function(exitCode) {
+                clearTimeout(generationTimeout)
 
-    //             if (exitCode !== 0) {
-    //                 return reject(reportError)
-    //             }
+                if (exitCode !== 0) {
+                    return reject(reportError)
+                }
 
-    //             console.log('Allure report successfully generated')
-    //             resolve()
-    //         })
-    //     })
-    // }
-    // onComplete: function() {
-    //     const reportError = new Error('Could not generate Allure report')
-    //     const generation = allure(['generate', 'test-results', '--clean'])
-    //     return new Promise((resolve, reject) => {
-    //         const generationTimeout = setTimeout(
-    //             () => reject(reportError),
-    //             5000)
+                console.log('Allure report successfully generated')
+                resolve()
+            })
+        })
+    }
+    /* onComplete: function() {
+        const reportError = new Error('Could not generate Allure report')
+        const generation = allure(['generate', 'test-results', '--clean'])
+        return new Promise((resolve, reject) => {
+            const generationTimeout = setTimeout(
+                () => reject(reportError),
+                5000)
 
-    //         generation.on('exit', function(exitCode) {
-    //             clearTimeout(generationTimeout)
+            generation.on('exit', function(exitCode) {
+                clearTimeout(generationTimeout)
 
-    //             if (exitCode !== 0) {
-    //                 return reject(reportError)
-    //             }
+                if (exitCode !== 0) {
+                    return reject(reportError)
+                }
 
-    //             console.log('Allure report successfully generated')
-    //             resolve()
-    //         })
-    //     })
-    // }
+                console.log('Allure report successfully generated')
+                resolve()
+            })
+        })
+    } */
     /**
     * Gets executed when a refresh happens.
     * @param {String} oldSessionId session ID of the old session

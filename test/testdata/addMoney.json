@@ -1,12 +1,39 @@
 {
-    "mobileNumber": "505500113",
-    "entityUserCountry": "United Arab Emirates",
-    "intlUserMobileNumber": "6358774213",
-    "intlUserCountry": "India",
+  "mobileNumber": "555500112",
+  "entityUserCountry": "United Arab Emirates",
+  "passcode": "1234",
+  "amount": "20",
+  "checkoutDebitCard": "5000186622346654",
+  "expiryDate": "1225",
+  "cvv": 257,
+  "receiverPhoneNumber": "555500113",
+
+  "UAE": {
+    "country": "United Arab Emirates",
+    "mobileNumber": "555500112",
     "passcode": "1234",
-    "amount": "20",
-    "checkoutDebitCard": "5000186622346654",
-    "stripeDebitCard": "4000056655665556",
-    "expiryDate": "1225",
-    "cvv": 257
+    "receiverCountry":"United Arab Emirates",
+    "receiverPhoneNumber": "555500113",
+    "sendAmount": "20",
+    "forexPhoneNumber": "9047528252",
+    "forexCountry": "India"
+  },
+  "INTL": {
+    "country": "India",
+    "mobileNumber": "9047528252",
+    "passcode": "1234",
+    "receiverCountry":"India",
+    "receiverPhoneNumber": "9680741251",
+    "sendAmount": "5"
+  },
+  "KEN": {
+    "country":"Kenya",
+    "phoneNumber":"722222210",
+    "passcode":"1111",
+    "receiverCountry":"Kenya",
+    "receiver":"705909004", 
+    "amount":"100",
+    "route":"PYYPL_TO_PYYPL"
   }
+  
+}

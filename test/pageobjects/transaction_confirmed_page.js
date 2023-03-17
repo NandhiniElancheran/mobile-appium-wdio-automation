@@ -1,20 +1,27 @@
+const {formattedSelector} = require('../helper/FormatSelectors.js')
+
 const transactionConfirmedSelectors = {
-    statusConfirmed: driver.isAndroid ? "//android.widget.TextView[@text='Top up']" : '(//XCUIElementTypeStaticText[@name="Confirmed"])[2]',
-    backHomeBtn: driver.isAndroid ? "//android.widget.TextView[@text='Send']" : '~test:id/backHome',
+    statusConfirmed: driver.isAndroid ? "(//android.widget.TextView[@text='Confirmed'])[2]" : '(//XCUIElementTypeStaticText[@name="Confirmed"])[2]',
+    statusPending: driver.isAndroid ? "(//android.widget.TextView[@text='Pending'])[2]" :'(//XCUIElementTypeStaticText[@name="Pending"])[2]',
+    backHomeBtn: 'test:id/BackHomeBtn',
    };
 class TransactionConfirmedPage {
     
-    async verifyStatusConfirmed() {
-        const myElem = await $(transactionConfirmedSelectors.backHomeBtn)
-        await myElem.waitForDisplayed()
-        
-        // you can also overwrite the default timeout if needed
-        //await myElem.waitForDisplayed({ timeout: 50000 })
-
-        //await $(transactionConfirmedSelectors.statusConfirmed).toHaveText('Confirmed');
+    async verifyTransactionStatus(senderCountry,receiverCountry) {
+        const myElem = await $(formattedSelector(transactionConfirmedSelectors.backHomeBtn))
+        await myElem.waitForDisplayed();       
+        if(senderCountry === receiverCountry){
+            const elem = await $(transactionConfirmedSelectors.statusConfirmed);
+            await elem.waitForDisplayed({timeout: 5000});
+            await expect(elem).toHaveText('Confirmed');
+        }else if(senderCountry !== receiverCountry){
+            const elem = await $(transactionConfirmedSelectors.statusPending);
+            await elem.waitForDisplayed({timeout: 5000});
+            await expect(elem).toHaveText('Pending');
+        }
     }
     async clickBackHomeButton() {
-        await $(transactionConfirmedSelectors.backHomeBtn).click();
+        await $(formattedSelector(transactionConfirmedSelectors.backHomeBtn)).click();
     }
 }
 

@@ -1,17 +1,19 @@
 const { setTimeout } = require('timers/promises');
 const { driver, $, $$, expect } = require ('@wdio/globals');
+const {formattedSelector} = require('../helper/FormatSelectors.js')
+
 //const { waitForEnabled } = require('webdriverio/build/commands/element');
 
 const topUpPageSelectors = {
-    debitCardTxt: driver.isAndroid ? "//android.widget.TextView[@text='Debit Card']" : '~test:id/DebitCardBtn',
-    amountTxt: driver.isAndroid ? "(//android.widget.EditText)[1]" : '~test:id/AmountInput',
-    cardNumberTxt: driver.isAndroid ? "//android.widget.EditText[@text='Card number']" : '~test:id/CardNumberInput',
-    cardExpiryDate: driver.isAndroid ? "//android.widget.EditText[@text='MM/YY']" : '~test:id/CardExpiryInput',
-    cardCvv: driver.isAndroid ? "//android.widget.EditText[@text='CVV']" : '~test:id/CardCVVInput',
-    topUpBtn: driver.isAndroid ?  "//android.widget.TextView[@text='Top up']" : '~test:id/TopUpBtn',
-    bottomSheet: driver.isAndroid ? '//android.widget.SeekBar[2]' : '~Bottom Sheet handle',
+    debitCardTxt: 'test:id/DebitCardBtn',
+    amountTxt: 'test:id/AmountInput',
+    cardNumberTxt: 'test:id/CardNumberInput',
+    cardExpiryDate: 'test:id/CardExpiryInput',
+    cardCvv: 'test:id/CardCVVInput',
+    topUpBtn: 'test:id/TopUpBtn',
+    bottomSheetCloseBtn: 'test:id/CloseBottomSheetBtn',
     transactionCompleteTitle: driver.isAndroid ? "//android.widget.TextView[@text='Transaction completed']" : '//XCUIElementTypeStaticText[@name="Transaction completed"]',
-    closeTransactioneCompleteBtn: driver.isAndroid ? "//android.widget.TextView[@text='Close']" : '~test:id/CloseBtn',
+    closeTransactioneCompleteBtn: 'test:id/CloseBtn',
     statusTxt: driver.isAndroid ? "//android.widget.TextView[@text='Confirmed']" : '~Confirmed',
     yourLoadOf: driver.isAndroid ? "//android.widget.TextView[@text='Confirmed']" : '//XCUIElementTypeStaticText[@name="Your load of"]',
     webViewContent: "//android.webkit.WebView//android.view.View[3]",
@@ -31,180 +33,68 @@ const DOCUMENT_READY_STATE = {
 class TopUpPage {
 
     async selectDebit() {
-        await $(topUpPageSelectors.debitCardTxt).click();
+        await driver.pause(5000);
+        await $(formattedSelector(topUpPageSelectors.debitCardTxt)).click();
     }
     async enterCheckoutDebitCardDetails(amount, cardNumber, expiryDate, cvv){
-        await $(topUpPageSelectors.amountTxt).setValue(amount);
-        await $(topUpPageSelectors.cardNumberTxt).clearValue();
+        await $(formattedSelector(topUpPageSelectors.amountTxt)).setValue(amount);
+        await $(formattedSelector(topUpPageSelectors.cardNumberTxt)).clearValue();
         driver.pause(5000);
-        await $(topUpPageSelectors.cardNumberTxt).setValue(cardNumber);
-        await $(topUpPageSelectors.cardExpiryDate).setValue(expiryDate);
-        await $(topUpPageSelectors.cardCvv).setValue(cvv);
+        await $(formattedSelector(topUpPageSelectors.cardNumberTxt)).setValue(cardNumber);
+        await $(formattedSelector(topUpPageSelectors.cardExpiryDate)).setValue(expiryDate);
+        await $(formattedSelector(topUpPageSelectors.cardCvv)).setValue(cvv);
         //await $(topUpPageSelectors.topUpBtn).waitForDisplayed({ timeout: 3000 });
         if(!driver.isAndroid){
             await $('//XCUIElementTypeButton[@name="Done"]').click();
         }
-        await $(topUpPageSelectors.topUpBtn).click();  
+        await $(formattedSelector(topUpPageSelectors.topUpBtn)).click();  
+        await driver.pause(50000);
+        new Promise(resolve => {
+            setTimeout(resolve, 90000);
+          });
     }
     
     async enterStripeDebitCardDetails(amount, cardNumber, expiryDate, cvv){
-        await $(topUpPageSelectors.amountTxt).setValue(amount);
+        await $(formattedSelector(topUpPageSelectors.amountTxt)).setValue(amount);
         await $(topUpPageSelectors.stripeCardNumberTxt).setValue(cardNumber);
         await $(topUpPageSelectors.stripeDateExpiryTxt).setValue(expiryDate);
         await $(topUpPageSelectors.stripeCvv).setValue(cvv);
-        let elem = $(topUpPageSelectors.topUpBtn);
+        let elem = $(formattedSelector(topUpPageSelectors.topUpBtn));
         await elem.waitForDisplayed({ timeout: 3000 });
-        await $(topUpPageSelectors.topUpBtn).click();
+        await $(formattedSelector(topUpPageSelectors.topUpBtn)).click();
         await new Promise(r => setTimeout(r, 10000));
+
     }
 
     async verifyTopUpDetails() {
-        driver.pause(10000);
-          await new Promise(r => setTimeout(r, 60000));
-          await setTimeout (10000);
-
-          //Dimension size = driver.manage().window().getSize();
-          //int width = size.getWidth();
-          //int height = size.getHeight();
-
-          let size = driver.getWindowRect();
-
-         let height =  (await size).height;
-         let width = (await size).width;
-
+         /*  await driver.pause(5000);
+        //   await new Promise(r => setTimeout(r, 60000));
+         const el = await $(topUpPageSelectors.yourLoadOf);
+         driver.waitUntil(() => {
+            return $(topUpPageSelectors.yourLoadOf).getText() === 'Your load of';
+          }, {
+            timeout: 5000,
+            timeoutMsg: 'Expected text to be different after 5s'
+          });
           
-        //   let x1 = (int) (width * 0.2);
-        //   let x2 = (int) (width * 0.2);
-        //   let y1 = (int) (height * 0.2);
-        //   let y2 = (int) (height * 0.7);
+         // await el.waitForDisplayed({ timeout: 50000 }); 
+          await expect(await $(topUpPageSelectors.yourLoadOf)).toHaveText('Your load of');
+ */
+          const elm = await $(formattedSelector( topUpPageSelectors.bottomSheetCloseBtn));
+          await elm.waitForExist({ timeout: 50000 });
+          await $(formattedSelector(topUpPageSelectors.bottomSheetCloseBtn)).click();
 
-
-//  new TouchAction((PerformsTouchActions) GlobalVars.driver).press(PointOption.point(x1, y1))
-//  .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(x2, y2))
-//  .release().perform();
-
-
-       //   const el = await $('//XCUIElementTypeOther[@name="Bottom Sheet handle"]');
-       //  await el.waitForDisplayed({ timeout: 10000 });
-
-         //var result = browser.execute('mobile: scroll', {direction: 'down'});
-         //driver.execute('mobile: doubleTap', {element: element.value.ELEMENT});
-
-         //await browser.execute("mobile: scroll", {  strategy: '~Bottom Sheet handle', selector : locator})
-
-        // await setTimeout (3000);
-        // await driver.touchPerform([
-        //     { action: 'press', x: 193, y: 118 },
-        //     { action: 'moveTo', x: 170, y: 800 },
-        //     'release'
-        // ])
-
-       // const myElem = await $(topUpPageSelectors.yourLoadOf)
-       // await myElem.waitForDisplayed()
-
-         
-
-//driver.execute('mobile: scroll', {direction: 'down'});
-
-// driver.touchPerform([
-//     { action: 'longPress', options: { x: 210, y: 124 }},
-//     { action: 'wait', ms: 5000},
-//     { action: 'moveTo', options: { x: 210, y: 867 }},
-//     { action: 'release' },
-//     { action: 'perform' }
-// ]);
-
-// driver.touchPerform([
-//     { action: 'press', options: { x: 100, y: 250 }},
-//     { action: 'wait', options: { ms: 100 }},
-//     { action: 'moveTo', options: { x: 300, y: 100 }},
-//     { action: 'release' }
-//   ]);
-
-
-// await browser.touchAction([
-//     { action: 'tap', x: 20, y: 90 },
-//     { action: "wait",  ms: 1000 },
-//     'release'
-//   ]);
-  
-        // await driver.touchPerform({
-        //     action: 'tap',
-        //     x: 20,
-        //     y: 90
-        // })
-
-    //    // driver.touchDoubleClick(myElem);
-
-    //     driver.touchAction([
-    //         { action: 'press', options: { x: 210, y: 124 }},
-    //         { action: 'wait', ms: 5000},
-    //         { action: 'moveTo', options: { x: 210, y: 867 }},
-    //         { action: 'release' }
-    //       ]);
- 
-    //     driver.multiTouchPerform([
-    //         { action: 'press', options: { x: 210, y: 124 }},
-    //         { action: 'wait', ms: 5000},
-    //         { action: 'moveTo', options: { x: 210, y: 867 }},
-    //         { action: 'release' }
-    //       ]);
-
-     // await driver.touchAction({
-        //     action: 'tap',
-        //     x: 100,
-        //     y: 40
-        // })
-
-        // await driver.touchAction({
-        //     action: 'tap',
-        //     x: 150,
-        //     y: 40
-        // })
-
-        // await driver.touchAction({
-        //     action: 'tap',
-        //     x: 200,
-        //     y: 40
-        // })
-
-        // await driver.touchAction({
-        //     action: 'tap',
-        //     x: 250,
-        //     y: 40
-        // })
-
-        // browser.action('pointer'. {
-        //     parameters: { pointerType: 'mouse' } // "mouse" is default value, also possible: "pen" or "touch"
-        // })
-        // await browser.touchAction([
-        //     { action: 'press', x: 500, y: 400 },
-        //     { action: 'moveTo', x: 500, y: 1000 },
-        //     'release'
-        // ])
-        // browser.swipeDown(await $(topUpPageSelectors.bottomSheet),400);
-        //  this.switchToContext().waitForVisible()
-        //    await this.switchToContext(CONTEXT_REF.WEBVIEW);
-        //    await driver.waitUntil(async ()=>
-        //         await (await $(topUpPageSelectors.webViewContent)).getText() === 'succeeded'
-        //     );
-        //     await this.switchToContext(CONTEXT_REF.NATIVE);
     }
     async verifyTransactionDetails() { 
-       // driver.pause(10000);
-        await new Promise(r => setTimeout(r, 10000));
         const elem = await $(topUpPageSelectors.transactionCompleteTitle);
         await elem.waitForDisplayed({ timeout: 10000 });
-
-       // await expect(elem).toBeDisplayed();
-        await setTimeout (10000);
-        await $(topUpPageSelectors.closeTransactioneCompleteBtn).click();
+        await $(formattedSelector(topUpPageSelectors.closeTransactioneCompleteBtn)).click();
         //    await $(topUpPageSelectors.transactionCompleteTitle).toHaveText('Transaction completed');
         //    await $(topUpPageSelectors.statusTxt).toHaveText('Confirmed');
     }
 
     async navigateToTopUpOptionsPage(){
-        await setTimeout (10000);
+        await new Promise(r => setTimeout(r, 5000));
         driver.back();
         
     }

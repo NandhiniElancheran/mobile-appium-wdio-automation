@@ -209,6 +209,15 @@
     import-meta-resolve "^2.1.0"
     read-pkg-up "^9.1.0"
 
+"@wdio/dot-reporter@^8.4.0":
+  version "8.4.0"
+  resolved "https://registry.npmjs.org/@wdio/dot-reporter/-/dot-reporter-8.4.0.tgz"
+  integrity sha512-k0WG6Tigct0/gD1V6qd0f6ucyTie9jzD7Wcfvz1hG76438tzLzbiRx3Li/niooSaJlSLnaHT1TediMVx4WEO2g==
+  dependencies:
+    "@wdio/reporter" "8.4.0"
+    "@wdio/types" "8.4.0"
+    chalk "^5.0.1"
+
 "@wdio/globals@^8.2.4", "@wdio/globals@8.3.5":
   version "8.3.5"
   resolved "https://registry.npmjs.org/@wdio/globals/-/globals-8.3.5.tgz"
@@ -285,6 +294,18 @@
     object-inspect "^1.12.0"
     supports-color "9.3.1"
 
+"@wdio/reporter@8.4.0":
+  version "8.4.0"
+  resolved "https://registry.npmjs.org/@wdio/reporter/-/reporter-8.4.0.tgz"
+  integrity sha512-CQMCUpb2nF3ja2s6sWd03007n7Ab2cvFH6a4Uv4Si8jJtf0M4uFLntiXKljg680/rlPLt/yXqkDSqQoAEjcTcA==
+  dependencies:
+    "@types/node" "^18.0.0"
+    "@wdio/logger" "8.1.0"
+    "@wdio/types" "8.4.0"
+    diff "^5.0.0"
+    object-inspect "^1.12.0"
+    supports-color "9.3.1"
+
 "@wdio/runner@8.3.5":
   version "8.3.5"
   resolved "https://registry.npmjs.org/@wdio/runner/-/runner-8.3.5.tgz"
@@ -306,6 +327,13 @@
   version "8.3.0"
   resolved "https://registry.npmjs.org/@wdio/types/-/types-8.3.0.tgz"
   integrity sha512-TTs3ETVOJtooTIY/u2+feeBnMBx2Hb4SEItN31r0pFncn37rnIZXE/buywLNf5wvZW9ukxoCup5hCnohOR27eQ==
+  dependencies:
+    "@types/node" "^18.0.0"
+
+"@wdio/types@8.4.0":
+  version "8.4.0"
+  resolved "https://registry.npmjs.org/@wdio/types/-/types-8.4.0.tgz"
+  integrity sha512-1eA0D0jS8Ttg67zB2gsZJFUcHcRz4VRjLTjxdLKh70+ZfB1+YZr9tScLgQjc+qsjsK1wKSzOz03uZiidwNnN9g==
   dependencies:
     "@types/node" "^18.0.0"
 
@@ -3300,7 +3328,7 @@ yargs-unparser@2.0.0:
     flat "^5.0.2"
     is-plain-obj "^2.1.0"
 
-yargs@^17.5.1:
+yargs@^17.5.1, yargs@^17.7.1:
   version "17.7.1"
   resolved "https://registry.npmjs.org/yargs/-/yargs-17.7.1.tgz"
   integrity sha512-cwiTb08Xuv5fqF4AovYacTFNxk62th7LKJ6BL9IGUpTJrWoU7/7WdQGTP2SjKf1dUNBGzDd28p/Yfs/GI6JrLw==

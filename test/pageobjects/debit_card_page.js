@@ -1,10 +1,11 @@
+const {formattedSelector} = require('../helper/FormatSelectors.js')
 const debitCardSelectors = {
-    nextBtn: driver.isAndroid ? "//android.widget.TextView[@text='Send']" : '~test:id/NextBtn',
+    nextBtn: 'test:id/NextBtn',
    };
 class DebitCardPage {
     
     async clickNextButton() {
-        await $(debitCardSelectors.nextBtn).click();
+        await $ (formattedSelector(debitCardSelectors.nextBtn)).click();
     }
    
 }

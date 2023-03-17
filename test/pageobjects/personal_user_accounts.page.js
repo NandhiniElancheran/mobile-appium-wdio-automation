@@ -1,26 +1,41 @@
+const { formattedSelector } = require('../helper/FormatSelectors.js')
+const { driver, $, $$, expect } = require('@wdio/globals');
+
+
 const personalUserAccountsPageSelectors = {
-    topUpBtn: driver.isAndroid ? "//android.widget.TextView[@text='Top up']" : '~test:id/TopUpBtn',
-    sendBtn: driver.isAndroid ? "//android.widget.TextView[@text='Send']" : '~test:id/SendMoneyBtn',
-    logoutBtn: driver.isAndroid ? "//android.widget.TextView[@text='Log Out']" : '(//XCUIElementTypeOther[@name="Log Out"])[3]',
-    yesBtn: driver.isAndroid ? "//android.widget.TextView[@text='Log Out']" : '~Yes',
-    profileImg: driver.isAndroid ? "(//android.view.ViewGroup)[17]" : '(//XCUIElementTypeOther[@name="Personal"])[1]/XCUIElementTypeOther[1]'
+    topUpBtn: 'test:id/TopUpBtn',
+    sendBtn: 'test:id/SendMoneyBtn',
+    logoutBtn: 'test:id/menu-item-logOut',
+    yesBtn: 'test:id/modal-button-Yes',
+    profileImg: 'test:id/ProfileBtn',
+    aboutUsBtn: 'test:id/menu-item-aboutUs',
+    privacyPolicy: 'test:id/menu-item-privacyPolicy'
 };
 class PersonalUserAccountsPage {
-    
+
     async navigateToTopUpPage() {
-        await $(personalUserAccountsPageSelectors.topUpBtn).click();
-      // await $('id:').click();
+        await $(formattedSelector(personalUserAccountsPageSelectors.topUpBtn)).click();
     }
     async navigateToSendPage() {
-        await $(personalUserAccountsPageSelectors.sendBtn).click();
+        await $(formattedSelector(personalUserAccountsPageSelectors.sendBtn)).click();
     }
-    async logout(){
-        //await browser.scroll(0, 200);
-        await $(personalUserAccountsPageSelectors.logoutBtn).click();
-        await $(personalUserAccountsPageSelectors.yesBtn).click();
-        }
-    async clickProfileImg(){
-        await $(personalUserAccountsPageSelectors.profileImg).click();
+    async logout() {
+        if (driver.isAndroid)
+            driver.longPressKeyCode(20);
+        const element = $(formattedSelector(personalUserAccountsPageSelectors.privacyPolicy));
+        await element.waitForDisplayed({ timeout: 10000 });
+        const el = $(formattedSelector(personalUserAccountsPageSelectors.logoutBtn));
+        if (driver.isAndroid)
+            do {
+                driver.longPressKeyCode(20);
+                await el.waitForDisplayed({ timeout: 5000 });
+            } while (!el.isDisplayed())
+        await $(formattedSelector(personalUserAccountsPageSelectors.logoutBtn)).click();
+        await $(formattedSelector(personalUserAccountsPageSelectors.yesBtn)).click();
+    }
+    async clickProfileImg() {
+        await $(formattedSelector(personalUserAccountsPageSelectors.profileImg)).click();
+        driver.pause(5000);
     }
 }
 
