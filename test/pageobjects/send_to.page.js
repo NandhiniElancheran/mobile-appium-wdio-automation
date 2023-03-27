@@ -1,6 +1,7 @@
 //const { $ } = require('webdriverio/build/commands/browser.js');
 const {formattedSelector} = require('../helper/FormatSelectors.js');
 const { driver,$, $$, expect } = require('@wdio/globals');
+const {calculateFeeForP2PLocal} = require('../helper/CommonFunctions.js');
 
 
 const sendToPageSelectors = {
@@ -10,11 +11,14 @@ const sendToPageSelectors = {
     clickContinueBtn: 'test:id/ContinueBtn',
     enterAmount: 'test:id/SendMoneyAmountInput',
     nextBtn: 'test:id/Next',
-    searchField: 'test:id/SearchInput'    
+    searchField: 'test:id/SearchInput',
+    currencyLabel: '',
+    balanceAmounttTxt: '',  
+    feeAmountTxt: '',
+    TotalAmount: '',  
    };
 class SendToPage {
     async enterPhoneNumber(phoneNumber,country) {
-       
         if(!driver.isAndroid){
             const ele = await $('//XCUIElementTypeStaticText[@name="Send to"]');
             ele.waitForExist({timeout:5000});
@@ -42,8 +46,10 @@ class SendToPage {
           await element.click();
         }
       }
-    async enterAmount(amount) {
+    async enterAmount(amount, countryCode) {
         await $(formattedSelector(sendToPageSelectors.enterAmount)).setValue(amount);
+        calculateFeeForP2PLocal(amount,countryCode);
+
     }
     async clickContinueButton() {
         await $(formattedSelector(sendToPageSelectors.clickContinueBtn)).click();

@@ -6,9 +6,20 @@ exports.config = {
     // Runner Configuration
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
-    runner: 'local',
-    port: 4723,
-    //
+  //  runner: 'local',
+  //  port: 4723,
+    
+  //  host: '127.0.0.1',
+  
+    protocol: 'https',
+    hostname: 'appium.bitbar.com',
+    port: 443,
+    path:  '/wd/hub',
+
+    // host: '127.0.0.1',
+    // port: 4723,
+   // path:  '/wd/hub',
+    
     // ==================
     // Specify Test Files
     // ==================
@@ -25,8 +36,8 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './test/specs/**/*.js',
-    //    './test/specs/addMoney.test.js'
+      //  './test/specs/**/*.js',
+        './test/specs/addMoney.test.js'
      // '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/specs/sendMoney.test.js'
     ],
     // Patterns to exclude.
@@ -55,33 +66,64 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
+    capabilities: [{
+        /* 'bitbar_apiKey': "RIXfSPnIXhBQQg2mcOFlKs7X5LxUhiEn",
+        'bitbar_device': "Google Pixel 3a Android 12",
+        'bitbar_app' :  "180695173", */
+       // platformName: "Android",
+        //'appium:deviceName': 'Google Pixel 3a Android 12',
+      //  'appium:automationName': "Appium",
+        // bitbar_project: "WebdriverIO_Example_Android",
+        // bitbar_testrun: "TestRun_Android",
 
-    capabilities: {
-        // Android: {
-        //     capabilities: {
-        //         platformName: 'Android',
-        //        'appium:automationName': 'UiAutomator2',
-        //        'appium:platformVersion': '13',
-        //        'appium:deviceName': 'emulator-5554',
-        //        'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/android/app-dev-release.apk',
-        //        'appium:noReset': 'false',
-        //        'appium:autoGrantPermissions': 'true'
-        //     }
-        // },
-        iOS: {
-            capabilities: {
-                platformName: 'iOS',
-                'appium:automationName': 'XCUITest',
-                'appium:platformVersion': '16.2',
-                'appium:deviceName': 'iPhone 14 Plus',
-                'appium:bundleId': 'com.pyypl.dev',
-                'appium:app': '/Users/nandhinielancheran/pyypl-mobile-appiumautomation/test/app/ios/pyypl.app',
-                'appium:autoAcceptAlerts': 'true',
-                'appium:noReset': 'false'
-            }
-        }
-    },
+       
+        // 'platformName': 'Android',
+        // 'deviceName': 'Android Phone',
+        // 'automationName': 'Appium',
+        // platformName: 'Android',
+         maxInstances: 1,
 
+        // 'appium:deviceName': 'Google Pixel 3a Android 12',
+        // 'appium:automationName': 'UiAutomator2',
+      //   'appium:app': './test/app/android/application.apk',
+         'appium:noReset': 'false',
+         'appium:autoGrantPermissions': 'true', 
+            "appium:bitbar_device": "Google Pixel 3a Android 12",
+            "platformName": "Android",
+            "appium:deviceName": "Android Phone",
+            "appium:automationName": "Appium",
+            "appium:bitbar_project": "Pyypl",
+            "appium:bitbar_testrun": "sendMoney",
+            "appium:app": "./test/app/android/application.apk",
+            "appium:ensureWebviewsHavePages": true,
+            "appium:nativeWebScreenshot": true,
+            "bitbar:options": {
+              "apiKey": "RIXfSPnIXhBQQg2mcOFlKs7X5LxUhiEn",
+              "app": "180695173"
+            },
+            "appium:newCommandTimeout": 3600,
+            "appium:connectHardwareKeyboard": true
+          /*   maxInstances: 1,
+            'appium:deviceName': 'Google Pixel 3a Android 12',
+            'appium:automationName': 'UiAutomator2',
+            'appium:app': path.resolve('application.apk'),
+            'appium:appPackage': 'com.pyypl.dev',
+            'appium:newCommandTimeout': 240 */
+      }],
+  
+    /* capabilities: [{
+        platformName: 'Android',
+        maxInstances: 1,
+        'bitbar_apiKey': 'RIXfSPnIXhBQQg2mcOFlKs7X5LxUhiEn',
+	    'bitbar_device': 'Google Pixel 3a Android 12',
+        'appium:deviceName': 'Android device',
+        'appium:automationName': 'UiAutomator2',
+        'appium:app': './test/app/android/app-dev-release.apk',
+        'appium:newCommandTimeout': 240,
+        'appium:noReset': 'false',
+        'appium:autoGrantPermissions': 'true'
+    }],
+ */    
     //
     // ===================
     // Test Configurations
@@ -134,6 +176,10 @@ exports.config = {
         command: 'appium',
         logPath : './',
         args: {
+            protocol: 'https',
+            address: "127.0.0.1",
+            path:  '/wd/hub',
+            port: 4723,
             debugLogSpacing: true,
             relaxedSecurity: true,
         }
@@ -164,34 +210,21 @@ exports.config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: [ 
-    //     ['spec',{
-    //     showPreface: false,
-    //     realtimeReporting: true,
-    //     symbols: {
-    //       passed: '[PASS]',
-    //       failed: '[FAIL]',
-    //     },
-    //   }],
         ['allure', {
             outputDir: 'test-results',
             disableWebdriverStepsReporting: true,
             disableWebdriverScreenshotsReporting: false,
         }],
+        [
+            'junit', {
+                outputDir: './',
+                outputFileFormat: () => {
+                    return 'TEST-all.xml';
+                }
+            }
+        ]
 
-        // ['mochawesome', {
-        //     outputDir: './Results',
-        //     outputFileFormat: function (opts) {
-        //         return `results-${opts.cid}.${opts.capabilities}.json`
-        //     }
-        // }]
     ],
-    // mochawesomeOpts: {
-    //     includeScreenshots: true,
-    //     screenshotUseRelativePath: true
-    // },
-
-
-    //
     // Options to be passed to Mocha.
     // See the full list at http://moc  hajs.org/
     mochaOpts: {
@@ -252,6 +285,18 @@ exports.config = {
      */
     // before: function (capabilities, specs) {
     // },
+    before: function() {
+        const fs = require('fs');
+
+        global.takeScreenshot = async (fileName) => {
+            let screenshot = await driver.takeScreenshot();
+            screenshot = screenshot.replace('/^data:image\/png;base64,/', "")
+            let filePath = path.resolve(`./screenshots/${fileName}.png`);
+            fs.writeFileSync(filePath, screenshot, 'base64');s
+        };
+
+    },
+
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

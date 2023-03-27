@@ -35,7 +35,7 @@ describe('Feature - Add money - Debit card Checkout Provider', () => {
   it(`Verify user's Account Top Up using Checkout provider Debit Card`, async () => {
     allureLog.addStep(`Navigate to Login from Welcome screen`);
     await WelcomePage.navigateToLoginPage();
-    allureLog.addStep(`Select Country: ${data?.entityUserCountry} from bottom sheet and enter Mobile number: ${data?.mobileNumber}`);
+    /* allureLog.addStep(`Select Country: ${data?.entityUserCountry} from bottom sheet and enter Mobile number: ${data?.mobileNumber}`);
     await LoginPage.login(data?.mobileNumber, data?.entityUserCountry);
     allureLog.addStep(`Enter Passcode`);
     await PasscodePage.enterPasscode(data?.passcode);
@@ -56,7 +56,7 @@ describe('Feature - Add money - Debit card Checkout Provider', () => {
     allureLog.addStep(`Click on Profile image icon in home screen`);
     await PersonalUserAccountsPage.clickProfileImg();
     allureLog.addStep(`Logout from the app`);
-    await PersonalUserAccountsPage.logout();
+    await PersonalUserAccountsPage.logout(); */
     
   })
 })

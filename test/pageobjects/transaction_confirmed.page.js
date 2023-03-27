@@ -4,6 +4,17 @@ const transactionConfirmedSelectors = {
     statusConfirmed: driver.isAndroid ? "(//android.widget.TextView[@text='Confirmed'])[2]" : '(//XCUIElementTypeStaticText[@name="Confirmed"])[2]',
     statusPending: driver.isAndroid ? "(//android.widget.TextView[@text='Pending'])[2]" :'(//XCUIElementTypeStaticText[@name="Pending"])[2]',
     backHomeBtn: 'test:id/BackHomeBtn',
+    countryLblTxt: '',
+    countryValueTxt:'',
+    servicelblTxt: '',
+    serviceValueTxt: '',
+    youSendlblTxt: '',
+    youSendValueTxt:'',
+    theyReceiveValueTxt: '',
+    feeLblTxt: '',
+    feeValueTxt: '',
+    totalLblTxt: '',
+    totalValueTxt: ''
    };
 class TransactionConfirmedPage {
     

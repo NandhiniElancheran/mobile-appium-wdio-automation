@@ -10,30 +10,33 @@
 
   "UAE": {
     "country": "United Arab Emirates",
+    "currency": "AED",
     "mobileNumber": "555500112",
     "passcode": "1234",
     "receiverCountry":"United Arab Emirates",
     "receiverPhoneNumber": "555500113",
     "sendAmount": "20",
     "forexPhoneNumber": "9047528252",
-    "forexCountry": "India"
+    "forexCountry": "India",
+    "forexCurrency": "USD"
   },
   "INTL": {
     "country": "India",
+    "currency": "USD",
     "mobileNumber": "9047528252",
     "passcode": "1234",
     "receiverCountry":"India",
     "receiverPhoneNumber": "9680741251",
     "sendAmount": "5"
   },
-  "KEN": {
+  "KENYA": {
     "country":"Kenya",
-    "phoneNumber":"722222210",
+    "currency": "KES",
+    "mobileNumber":"722222210",
     "passcode":"1111",
     "receiverCountry":"Kenya",
-    "receiver":"705909004", 
-    "amount":"100",
-    "route":"PYYPL_TO_PYYPL"
+    "receiverPhoneNumber":"701996688", 
+    "sendAmount":"100"
   }
   
 }

@@ -3,7 +3,7 @@ const { driver, $, $$, expect } = require ('@wdio/globals');
 const {formattedSelector} = require('../helper/FormatSelectors.js')
 
 //const { waitForEnabled } = require('webdriverio/build/commands/element');
-import {formattedSelector} from '../helper/FormatSelectors'
+//import {formattedSelector} from '../helper/FormatSelectors'
 
 
 const topUpPageSelectors = {

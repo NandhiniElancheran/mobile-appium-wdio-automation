@@ -2,6 +2,7 @@ const allure = require('allure-commandline')
 const allureLog = require('@wdio/allure-reporter').default;
 const { getCapabilities, platformName } = require('./test/helper/CliCommands.js')
 const { driver, $, $$, expect } = require('@wdio/globals');
+const path = require('path');
 
 exports.config = {
     runner: 'local',
@@ -20,11 +21,12 @@ exports.config = {
         'appium:automationName': 'UiAutomator2',
         'appium:platformVersion': '13',
         'appium:deviceName': 'Google_Pixel_5', //'316dad25'
-        'appium:app': './test/app/android/app-dev-release.apk',
+        'appium:app': './test/app/android/application.apk',
+       //'appium:app': path.resolve('application.apk'),
         'appium:autoGrantPermissions': 'true',
         'appium:autoAcceptAlerts': 'true',
-        'appium:noReset': 'false'
-
+        'appium:noReset': 'false',
+        'appium:newCommandTimeout': 5000
     }],
 
     // Level of logging verbosity: trace | debug | info | warn | error | silent
